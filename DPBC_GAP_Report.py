@@ -164,8 +164,8 @@ if uploaded_file:
 
 
     
- import streamlit as st
-import pandas as pd
+# import streamlit as st
+#import pandas as pd
 
 def download_data(conn):
 
