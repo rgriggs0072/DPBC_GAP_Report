@@ -125,7 +125,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     # read Excel file into pandas DataFrame
     df = pd.read_excel(uploaded_file)
     # replace NaN values with "NULL"
-    df.fillna(value=pd.np.nan, inplace=True)
+    df.fillna(value=np.nan, inplace=True)
     # write DataFrame to Snowflake
     cursor = conn.cursor()
     sql_query = "CREATE OR REPLACE TABLE tmp_table AS SELECT \
