@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DPBC_GAP_Report", "DPBC_GAP_Report.pyproj", "{30A8312E-2584-4B6F-97D1-BA952D1FAC37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30A8312E-2584-4B6F-97D1-BA952D1FAC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A8312E-2584-4B6F-97D1-BA952D1FAC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9B7A9ED-F18A-4FB3-BFBF-4DEA1C79B6BE}
+	EndGlobalSection
+EndGlobal
