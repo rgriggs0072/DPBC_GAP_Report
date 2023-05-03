@@ -170,12 +170,12 @@ import base64
 
 def create_gap_report(conn):
     # Execute SQL query and retrieve data
-    query = "SELECT * FROM my_view"
+    query = "SELECT * FROM GAP_REPORT"
     df = pd.read_sql(query, conn)
 
     # Create button to download Excel file
     if st.button('Download Gap Report'):
-        tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download your data!')
+        tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download GAP_REPORT!')
         st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 def download_link(df, filename, link_text):
