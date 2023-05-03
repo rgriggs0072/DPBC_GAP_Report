@@ -164,4 +164,27 @@ if uploaded_file:
 
 
     
- 
+ import streamlit as st
+import pandas as pd
+
+def download_data(conn):
+
+    # Execute SQL query and retrieve data
+    query = "SELECT * FROM GAP_REPORT"
+    df = pd.read_sql(query, conn)
+
+    # Create button to download Excel file
+    if st.button('Download Excel'):
+        tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download GAP_REPORT!')
+        st.markdown(tmp_download_link, unsafe_allow_html=True)
+
+def download_link(df, filename, link_text):
+    """
+    Generates a link allowing the data in a given pandas dataframe to be downloaded
+    in CSV format.
+    """
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()
+    href = f'data:text/csv;base64,{b64}'
+    return f'<a href="{href}" download="{filename}">{link_text}</a>'
+
