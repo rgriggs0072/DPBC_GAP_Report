@@ -3,6 +3,16 @@ import snowflake.connector
 import streamlit as st
 import pandas as pd
 
+
+
+
+
+# Displaying images on the front end
+from PIL import Image
+image = Image.open('images/DeltaPacific_Logo.jpg')
+st.image(image, caption='',width=100)
+
+
 def write_to_snowflake(df, warehouse, database, schema, table):
   
     # establish a new connection to Snowflake
