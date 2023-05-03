@@ -6,7 +6,7 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
 import numpy as np
-
+from io import BytesIO
 
 # Displaying images on the front end
 from PIL import Image
@@ -19,7 +19,7 @@ st.header("Gap Report and Analysis")
 
 
 
-from io import BytesIO
+
 
 def format_sales_report(workbook):
     # Delete all sheets except SALES_REPORT
