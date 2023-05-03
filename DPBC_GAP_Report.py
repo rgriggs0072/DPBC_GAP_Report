@@ -138,7 +138,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     CAST(PURCHASED_YES_NO AS VARCHAR) AS PURCHASED_YES_NO \
     FROM (VALUES {}) \
     AS tmp(STORE_NUMBER, STORE_NAME, ADDRESS, SALESPERSON, PRODUCT_NAME, UPC, PURCHASED_YES_NO);".format(
-        ', '.join([str(tuple(df.iloc[i].fillna(pd.np.nan).values)) for i in range(len(df))])
+        ', '.join([str(tuple(df.iloc[i].fillna(np.nan).values)) for i in range(len(df))])
     )
     #st.write(sql_query)  # print the SQL query
     cursor.execute(sql_query)
