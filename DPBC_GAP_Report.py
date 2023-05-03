@@ -189,6 +189,5 @@ def download_link(df, filename, link_text):
     href = f'data:text/csv;base64,{b64}'
     return f'<a href="{href}" download="{filename}">{link_text}</a>'
 
-# launch_gap_report("Pull Gap Report"):
-    if st.button('Generate Gap Report'):
-        create_gap_report(conn)
+if st.button('Generate Gap Report'):
+    create_gap_report(conn)
