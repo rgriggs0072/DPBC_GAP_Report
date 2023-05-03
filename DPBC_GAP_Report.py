@@ -163,54 +163,5 @@ if uploaded_file:
 
 
 
-    
-import base64
-import snowflake.connector
-from snowflake.sqlalchemy import URL, create_engine
-
-# Create a Snowflake connection object
-conn = snowflake.connector.connect(
-    user='rgriggs0072',
-    password='Cyaamstr927!',
-    account='OEZIERR-CNB82593',
-    warehouse='COMPUTE_WH',
-    database='DATASETS',
-    schema='DATASETS'
-)
-
-# Create a SQLAlchemy engine object
-engine = create_engine(URL(
-    account='OEZIERR-CNB82593',
-    user='RGRIGGS0072',
-    password='cYAAMSTR927!',
-    database='DATASETS',
-    schema='DATASETS',
-    warehouse='COMPUTE_WH',
-    role='ACCOUNTADMIN',
-    ))
-    
-def create_gap_report():
-    # Execute SQL query and retrieve data
-    query = "SELECT * FROM my_view"
-    df = pd.read_sql(query, engine)
-
-    # Create button to download Excel file
-    if st.button('Download Gap Report'):
-        tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download your data!')
-        st.markdown(tmp_download_link, unsafe_allow_html=True)
-
-def download_link(df, filename, link_text):
-    """
-    Generates a link allowing the data in a given pandas dataframe to be downloaded
-    in CSV format.
-    """
-    csv = df.to_csv(index=False)
-    b64 = base64.b64encode(csv.encode()).decode()
-    href = f'data:text/csv;base64,{b64}'
-    return f'<a href="{href}" download="{filename}">{link_text}</a>'
-
-if st.button('Generate Gap Report'):
-    create_gap_report()
-
 
 
