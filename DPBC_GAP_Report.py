@@ -169,7 +169,6 @@ import pandas as pd
 import base64
 
 def create_gap_report(conn):
-
     # Execute SQL query and retrieve data
     query = "SELECT * FROM my_view"
     df = pd.read_sql(query, conn)
@@ -188,6 +187,16 @@ def download_link(df, filename, link_text):
     b64 = base64.b64encode(csv.encode()).decode()
     href = f'data:text/csv;base64,{b64}'
     return f'<a href="{href}" download="{filename}">{link_text}</a>'
+
+# establish a connection to Snowflake
+conn = snowflake.connector.connect(
+    user='rgriggs0072',
+    password='Cyaamstr927!',
+    account='OEZIERR-CNB82593',
+    warehouse='compute_wh',
+    database='datasets',
+    schema='datasets'
+)
 
 if st.button('Generate Gap Report'):
     create_gap_report(conn)
