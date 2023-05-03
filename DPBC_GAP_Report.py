@@ -110,9 +110,9 @@ def write_to_snowflake(df, warehouse, database, schema, table):
         user='rgriggs0072',
         password='Cyaamstr927!',
         account='OEZIERR-CNB82593',
-        warehouse=warehouse,
+        warehouse='COMPUTE_WH',
         database='datasets',
-        schema=schema
+        schema='DATASETS'
     )
 
 
