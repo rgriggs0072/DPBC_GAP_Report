@@ -2,3 +2,6 @@ streamlit
 pandas
 snowflake-connector-python==2.6.2
 openpyxl
+from openpyxl.utils
+from openpyxl.utils import get_column_letter
+from openpyxl import load_workbook
