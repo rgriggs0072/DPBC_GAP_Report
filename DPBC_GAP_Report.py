@@ -167,15 +167,22 @@ if uploaded_file:
 import streamlit as st
 import pandas as pd
 import base64
+import snowflake.connector
+from sqlalchemy import create_engine
 
-def create_gap_report(conn):
+def create_gap_report():
+    
+    # establish a new connection to Snowflake using SQLAlchemy
+    engine = create_engine('snowflake://rgriggs0072:Cyaamstr927!@OEZIERR-CNB82593/database/datasets/schema/datasets')
+    conn = engine.connect()
+    
     # Execute SQL query and retrieve data
-    query = "SELECT * FROM GAP_REPORT"
+    query = "SELECT * FROM my_view"
     df = pd.read_sql(query, conn)
 
     # Create button to download Excel file
     if st.button('Download Gap Report'):
-        tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download GAP_REPORT!')
+        tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download your data!')
         st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 def download_link(df, filename, link_text):
@@ -188,15 +195,6 @@ def download_link(df, filename, link_text):
     href = f'data:text/csv;base64,{b64}'
     return f'<a href="{href}" download="{filename}">{link_text}</a>'
 
-# establish a connection to Snowflake
-conn = snowflake.connector.connect(
-    user='rgriggs0072',
-    password='Cyaamstr927!',
-    account='OEZIERR-CNB82593',
-    warehouse='compute_wh',
-    database='datasets',
-    schema='datasets'
-)
-
 if st.button('Generate Gap Report'):
-    create_gap_report(conn)
+    create_gap_report()
+
