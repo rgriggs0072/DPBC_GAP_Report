@@ -54,7 +54,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
 
 
 # create file uploader
-uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx"])
+uploaded_file = st.file_uploader("CURRENT SALES REPORT AFTER IT HAS BEEN FORMATED", type=["xlsx"])
 
 # check if file was uploaded
 if uploaded_file:
