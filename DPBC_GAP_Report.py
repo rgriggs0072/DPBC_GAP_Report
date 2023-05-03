@@ -167,18 +167,35 @@ if uploaded_file:
 import streamlit as st
 import pandas as pd
 import base64
+import pandas as pd
 import snowflake.connector
-from sqlalchemy import create_engine
+from snowflake.sqlalchemy import URL, create_engine
 
+# Create a Snowflake connection object
+conn = snowflake.connector.connect(
+    user='rgriggs0072',
+    password='Cyaamstr927!',
+    account='OEZIERR-CNB82593',
+    warehouse='COMPUTE_WH',
+    database='DATASETS',
+    schema='DATASETS'
+)
+
+# Create a SQLAlchemy engine object
+engine = create_engine(URL(
+    account='OEZIERR-CNB82593',
+    user='RGRIGGS0072',
+    password='cYAAMSTR927!',
+    database='DATASETS',
+    schema='DATASETS',
+    warehouse='COMPUTE_WH',
+    role='ACCOUNTADMIN',
+    ))
+    
 def create_gap_report():
-    
-    # establish a new connection to Snowflake using SQLAlchemy
-    engine = create_engine('snowflake://rgriggs0072:Cyaamstr927!@OEZIERR-CNB82593/database/datasets/schema/datasets')
-    conn = engine.connect()
-    
     # Execute SQL query and retrieve data
     query = "SELECT * FROM my_view"
-    df = pd.read_sql(query, conn)
+    df = pd.read_sql(query, engine)
 
     # Create button to download Excel file
     if st.button('Download Gap Report'):
@@ -198,3 +215,5 @@ def download_link(df, filename, link_text):
 if st.button('Generate Gap Report'):
     create_gap_report()
 
+
+snowflake-sqlalchemy
