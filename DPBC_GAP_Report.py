@@ -8,17 +8,13 @@ from openpyxl import load_workbook
 import numpy as np
 
 
-
-
-
-
-
 # Displaying images on the front end
 from PIL import Image
 image = Image.open('images/DeltaPacific_Logo.jpg')
 st.image(image, caption='',width=100)
 
-
+st.header("Delta Pacific Beverage")
+st.title("Gap Report and Analysis")
 
 
 
