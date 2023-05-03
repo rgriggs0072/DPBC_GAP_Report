@@ -21,8 +21,6 @@ st.header("Gap Report and Analysis")
 
 from io import BytesIO
 
-from io import BytesIO
-
 def format_sales_report(workbook):
     # Delete all sheets except SALES_REPORT
     for sheet_name in workbook.sheetnames:
@@ -85,7 +83,7 @@ def format_sales_report(workbook):
 
 
 # Upload the workbook
-uploaded_file = st.file_uploader("Upload Excel File", type=["xlsx", "xls"])
+uploaded_file = st.file_uploader("Upload freshly ran sales report from Encore", type=["xlsx", "xls"])
 
 if uploaded_file is not None:
     # Load the workbook
