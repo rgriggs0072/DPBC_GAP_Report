@@ -164,8 +164,9 @@ if uploaded_file:
 
 
     
-#import streamlit as st
-#import pandas as pd
+import streamlit as st
+import pandas as pd
+import base64
 
 def create_gap_report(conn):
 
@@ -174,7 +175,7 @@ def create_gap_report(conn):
     df = pd.read_sql(query, conn)
 
     # Create button to download Excel file
-    if st.button('Create Gap Report'):
+    if st.button('Download Gap Report'):
         tmp_download_link = download_link(df, 'my_data.csv', 'Click here to download your data!')
         st.markdown(tmp_download_link, unsafe_allow_html=True)
 
@@ -187,3 +188,7 @@ def download_link(df, filename, link_text):
     b64 = base64.b64encode(csv.encode()).decode()
     href = f'data:text/csv;base64,{b64}'
     return f'<a href="{href}" download="{filename}">{link_text}</a>'
+
+def launch_gap_report(conn):
+    if st.button('Generate Gap Report'):
+        create_gap_report(conn)
