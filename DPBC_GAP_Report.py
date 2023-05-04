@@ -188,7 +188,7 @@ def create_gap_report(conn):
     if st.button('Download Gap Report'):
        tmp_download_link = get_table_download_link(df)
 
-        st.markdown(tmp_download_link, unsafe_allow_html=True)
+    st.markdown(tmp_download_link, unsafe_allow_html=True)
 
     # Display the data in a table
     st.dataframe(df)
