@@ -70,8 +70,17 @@ def format_sales_report(workbook):
             if cell.value is not None and isinstance(cell.value, str):
                 cell.value = cell.value.replace(',', ' ')
 
-    # Format column G to number format with no decimals
-    ws["G"].number_format = "0" # Display to 2dp
+    # Get the column index of column G
+    col_idx = ws['G'][0].column
+
+# Format column as number with no decimals
+    for cell in ws.iter_cols(min_col=col_idx, max_col=col_idx):
+        for c in cell:
+            if isinstance(c.value, str) and c.value.strip() != '':
+                c.number_format = '0'
+                c.value = float(c.value.replace(",", ""))
+
+
                 
     
     # Format column G to number format with no decimals
