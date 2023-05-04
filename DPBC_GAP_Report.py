@@ -109,6 +109,9 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     
     # read Excel file into pandas DataFrame
     df = pd.read_excel(uploaded_file)
+    
+    # clean the STORE_NAME column by removing leading/trailing whitespace
+    df['STORE_NAME'] = df['STORE_NAME'].str.strip()
     # replace NaN values with "NULL"
     df.fillna(value=np.nan, inplace=True)
 
