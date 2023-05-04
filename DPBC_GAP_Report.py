@@ -100,6 +100,7 @@ if uploaded_file is not None:
         new_workbook.save(stream)
         stream.seek(0)
         st.download_button(label="Download formatted file", data=stream.read(), file_name=new_filename, mime='application/vnd.ms-excel')
+        st.write("File is in your download folder
 
 
 
@@ -194,9 +195,8 @@ def create_gap_report(conn):
     with open(temp_file_path, 'rb') as f:
         bytes_data = f.read()
         st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-
     st.dataframe(df)
-
+    st.write("File Has Been Downloaded to Your Local Download Folder")
 
 # Establish a new connection to Snowflake
 conn = snowflake.connector.connect(
