@@ -195,7 +195,7 @@ def download_link(df, filename, link_text):
 conn = snowflake.connector.connect(
     user='rgriggs0072',
     password='Cyaamstr927!',
-    account='your_account',
+    account='OEZIERR-CNB82593',
     warehouse='COMPUTE_WH',
     database='DATASETS',
     schema='DATASETS'
