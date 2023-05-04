@@ -7,7 +7,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
 import numpy as np
 from io import BytesIO
-from openpyxl.styles import numbers
+from openpyxl import Workbook
 
 # Displaying images on the front end
 from PIL import Image
