@@ -3,6 +3,7 @@ import snowflake.connector
 import streamlit as st
 import pandas as pd
 import openpyxl
+from openpyxl.styles import numbers
 from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
 import numpy as np
@@ -76,25 +77,16 @@ def format_sales_report(workbook):
         if cell.value is not None:
             cell.value = str(cell.value).replace(',', ' ')
 
-    # Get the column index of "Buyer Count 2/1/2023 - 5/2/2023"
-    col_idx = None
-    for i, col in enumerate(ws.iter_cols()):
-        if col[0].value == "Buyer Count 2/1/2023 - 5/2/2023":
-            col_idx = i+1 # adjust for 0-indexing
-            break
-
-    # Format column as number with no decimals
-    if col_idx:
-        for cell in ws.iter_rows(min_row=2, min_col=col_idx, max_col=col_idx):
-            for c in cell:
-                if isinstance(c.value, str) and c.value.strip() != '':
-                    # Convert to number
-                    value = float(c.value.replace(",", ""))
-                    # Format as number with no decimals
-                    c.number_format = '0'
-                    c.value = int(value)
-
-
+    # Format column G as number with no decimals
+    for cell in ws['G'][1:]:
+        if isinstance(cell.value, (int, float)):
+            cell.number_format = numbers.FORMAT_NUMBER
+        elif isinstance(cell.value, str):
+            cell.number_format = numbers.FORMAT_NUMBER
+            try:
+                cell.value = float(cell.value.replace(",", ""))
+            except ValueError:
+                pass
                 
     
     # Format column G to number format with no decimals
