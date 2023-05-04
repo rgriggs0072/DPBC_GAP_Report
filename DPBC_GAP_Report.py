@@ -114,7 +114,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     df['STORE_NAME'] = df['STORE_NAME'].str.strip()
     # replace NaN values with "NULL"
     df.fillna(value=np.nan, inplace=True)
-   (df["STORE_NAME"].notnull()) & (df["STORE_NAME"]==u'')
+    (df["STORE_NAME"].notnull()) & (df["STORE_NAME"]==u'')
 
 
 # Check if the STORE_NAME column contains empty values
