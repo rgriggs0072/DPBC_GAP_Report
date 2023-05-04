@@ -22,7 +22,7 @@ st.header("Gap Report and Analysis")
 
 
 def format_sales_report(workbook):
-    # Delete all sheets except SALES_REPORT
+    # Delete all sheets except SALES REPORT
     for sheet_name in workbook.sheetnames:
         if sheet_name != 'SALES_REPORT':
             workbook.remove(workbook[sheet_name])
