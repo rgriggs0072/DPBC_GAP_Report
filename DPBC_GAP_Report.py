@@ -18,17 +18,14 @@ st.header("Gap Report and Analysis")
 
 
 
-
-
-
 def format_sales_report(workbook):
-    # Delete all sheets except SALES REPORT
+    # Delete all sheets except SALES_REPORT
     for sheet_name in workbook.sheetnames:
-        if sheet_name != 'SALES REPORT':
+        if sheet_name != 'SALES_REPORT':
             workbook.remove(workbook[sheet_name])
 
     # Select the SALES_REPORT sheet
-    ws = workbook['SALES REPORT']
+    ws = workbook['SALES_REPORT']
 
     # Delete row 2
     ws.delete_rows(2)
@@ -40,17 +37,7 @@ def format_sales_report(workbook):
     for cell in ws['F']:
         if cell.value is not None:
             cell.value = str(cell.value).replace('-', '')
-            
-    # Remove the word Is Null and replace with zero(0) in column F
-    for cell in ws['F']:
-        if cell.value is not None:
-            cell.value = str(cell.value).replace('Is Null', '0')
-    
-    # Remove commas from column E and replace with space
-    for cell in ws['E']:
-        if cell.value is not None:
-            cell.value = str(cell.value).replace(',', ' ')
-            
+
     # Create a new column for store name
     ws.insert_cols(2)
     ws.cell(row=1, column=2, value='STORE NAME')
@@ -71,6 +58,10 @@ def format_sales_report(workbook):
         if cell.value is not None and isinstance(cell.value, str):
             cell.value = cell.value.replace(',', ' ')
 
+    # Remove all 's in column B
+    for cell in ws['B']:
+        if cell.value is not None and isinstance(cell.value, str):
+            cell.value = cell.value.replace(" 's", "")
 
     # Replace all commas with spaces in column E
     for row in ws.iter_rows(min_row=2, min_col=5, max_col=5):
@@ -78,17 +69,17 @@ def format_sales_report(workbook):
             if cell.value is not None and isinstance(cell.value, str):
                 cell.value = cell.value.replace(',', ' ')
 
+      # Format column G as a number with no decimals
+        df["G"] = df["G"].apply(lambda x: int(x))
+
+    
+    
     # Format column G to number format with no decimals
-    for row in ws.iter_rows(min_row=2, min_col=7, max_col=7):
-        for cell in row:
-            if isinstance(cell.value, str) and cell.value.strip() != '' and cell.value != 'Carrier UPC':
-                cell.number_format = '0'
-                cell.value = float(cell.value.replace(",", ""))
-                
-    # Remove all commas from column C and replace with space
-    for cell in ws['C']:
-        if cell.value is not None:
-            cell.value = str(cell.value).replace(',', ' ')
+    #for row in ws.iter_rows(min_row=2, min_col=7, max_col=7):
+    #    for cell in row:
+    #        if isinstance(cell.value, str) and cell.value.strip() != '' and cell.value != 'Carrier UPC':
+    #            cell.number_format = '0'
+    #            cell.value = float(cell.value.replace(",", ""))
 
     return workbook
 
