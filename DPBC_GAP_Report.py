@@ -210,6 +210,6 @@ conn = snowflake.connector.connect(
 
 if st.button('Generate Gap Report :beers:'):
     with st.spinner('Generating report...'):
-    create_gap_report(conn)
+        create_gap_report(conn)
     
 
