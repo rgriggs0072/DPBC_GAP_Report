@@ -180,19 +180,18 @@ def create_gap_report(conn):
     """
     Retrieves data from a Snowflake view and creates a button to download the data as an Excel report.
     """
-    # Execute SQL query and retrieve data from the Gap_Report view
-    query = "SELECT * FROM Gap_Report"
-    df = pd.read_sql(query, conn)
+# Execute SQL query and retrieve data from the Gap_Report view
+query = "SELECT * FROM Gap_Report"
+df = pd.read_sql(query, conn)
 
+# Create button to download Excel file
 if st.button('Download Gap Report'):
-        print("Download button clicked!")
-   tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
-   st.markdown(tmp_download_link, unsafe_allow_html=True)
+    print("Download button clicked!")
+    tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
+    st.markdown(tmp_download_link, unsafe_allow_html=True)
 
-
-    # Display the data in a table
-    st.dataframe(df)
-
+# Display the data in a table
+st.dataframe(df)
 # Establish a new connection to Snowflake
 conn = snowflake.connector.connect(
     user='rgriggs0072',
