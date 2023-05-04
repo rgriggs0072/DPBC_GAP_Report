@@ -158,7 +158,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
  
     # write DataFrame to Snowflake
     cursor = conn.cursor()
-    sql_query = "CREATE OR REPLACE TABLE tmp_table AS SELECT \
+    sql_query = "CREATE OR REPLACE TABLE SALES_REPORT AS SELECT \
     CAST(STORE_NUMBER AS NUMBER) AS STORE_NUMBER, \
     CAST(STORE_NAME AS VARCHAR) AS STORE_NAME, \
     CAST(ADDRESS AS VARCHAR) AS ADDRESS, \
