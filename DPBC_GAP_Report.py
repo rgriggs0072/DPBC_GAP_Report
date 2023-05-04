@@ -113,13 +113,10 @@ def write_to_snowflake(df, warehouse, database, schema, table):
    
     # replace NaN values with "NULL"
     df.fillna(value=np.nan, inplace=True)
-    (df["STORE_NAME"].notnull()) & (df["STORE_NAME"]==u'')
+    
 
 
-# Check if the STORE_NAME column contains empty values
-    if df['STORE_NAME'].isnull().values.any():
-        st.warning("The STORE_NAME column contains empty values. Please fix the spreadsheet and upload again.")
-    return
+
   
     # establish a new connection to Snowflake
     conn = snowflake.connector.connect(
