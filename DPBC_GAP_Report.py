@@ -195,7 +195,7 @@ def create_gap_report(conn):
     with open(temp_file_path, 'rb') as f:
         bytes_data = f.read()
         st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-     st.write("File Has Been Downloaded to Your Local Download Folder")
+    st.write("File Has Been Downloaded to Your Local Download Folder")
     st.dataframe(df)
    
 
