@@ -166,32 +166,31 @@ import base64
 import snowflake.connector
 from io import BytesIO
 
-def get_table_download_link(df):
+def download_link(df, filename, link_text):
     """
-    Generates a link allowing the data in a given pandas dataframe to be downloaded in CSV format.
+    Generates a link allowing the data in a given pandas dataframe to be downloaded in Excel format.
     """
-    csv = df.to_csv(index=False)
-    b64 = base64.b64encode(csv.encode()).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="gap_report.csv">Click here to download the Gap Report!</a>'
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='Sheet1', index=False)
+    writer.save()
+    b64 = base64.b64encode(output.getvalue()).decode()
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="{filename}">{link_text}</a>'
     return href
 
 
 def create_gap_report(conn):
     """
-    Retrieves data from a Snowflake view and creates a button to download the data as an Excel report.
+    Retrieves data from a Snowflake view and displays it in a table.
     """
-# Execute SQL query and retrieve data from the Gap_Report view
-query = "SELECT * FROM Gap_Report"
-df = pd.read_sql(query, conn)
+    # Execute SQL query and retrieve data from the Gap_Report view
+    query = "SELECT * FROM Gap_Report"
+    df = pd.read_sql(query, conn)
 
-# Create button to download Excel file
-if st.button('Download Gap Report'):
-    print("Download button clicked!")
-    tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
-    st.markdown(tmp_download_link, unsafe_allow_html=True)
+    # Display the data in a table
+    st.dataframe(df)
 
-# Display the data in a table
-st.dataframe(df)
+
 # Establish a new connection to Snowflake
 conn = snowflake.connector.connect(
     user='rgriggs0072',
@@ -205,3 +204,9 @@ conn = snowflake.connector.connect(
 # Create button to generate Gap Report
 if st.button('Generate Gap Report'):
     create_gap_report(conn)
+
+    # Create button to download Excel file
+    if st.button('Download Gap Report'):
+        print("Download button clicked!")
+        tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
+        st.markdown(tmp_download_link, unsafe_allow_html=True)
