@@ -185,11 +185,15 @@ def create_gap_report(conn):
     query = "SELECT * FROM Gap_Report"
     df = pd.read_sql(query, conn)
 
-    # Create button to download CSV file
-    if st.button('Download Gap Report'):
-        st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+    # Write the updated dataframe to a temporary file
+    temp_file_path = 'temp.xlsx'
+    df.to_excel(temp_file_path, index=False)
 
-    # Display the data in a table
+    # Add a download button
+    with open(temp_file_path, 'rb') as f:
+        bytes_data = f.read()
+        st.download_button(label="Download updated file", data=bytes_data, file_name='updated_file.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
     st.dataframe(df)
 
 
