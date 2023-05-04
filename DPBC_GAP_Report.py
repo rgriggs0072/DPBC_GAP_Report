@@ -71,12 +71,20 @@ def format_sales_report(workbook):
                 cell.value = cell.value.replace(',', ' ')
 
     # Format column G to number format with no decimals
-    for row in ws.iter_rows(min_row=2, min_col=7, max_col=7):
-        for cell in row:
-            if isinstance(cell.value, str) and cell.value.strip() != '' and cell.value != 'Carrier UPC':
-                cell.number_format = numbers.FORMAT_NUMBER
-                cell.number_format = '0'
-                cell.value = int(cell.value.replace(",", ""))
+    # Get the column index of "Buyer Count 2/1/2023 - 5/2/2023"
+col_idx = None
+for i, col in enumerate(ws.iter_cols()):
+    if col[0].value == "Buyer Count 2/1/2023 - 5/2/2023":
+        col_idx = i+1 # adjust for 0-indexing
+        break
+
+# Format column as number with no decimals
+if col_idx:
+    for cell in ws.iter_cols(min_col=col_idx, max_col=col_idx):
+        for c in cell:
+            if isinstance(c.value, str) and c.value.strip() != '':
+                c.number_format = '0'
+                c.value = float(c.value.replace(",", ""))
                 
     
     # Format column G to number format with no decimals
