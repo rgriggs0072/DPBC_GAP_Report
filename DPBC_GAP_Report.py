@@ -208,7 +208,6 @@ conn = snowflake.connector.connect(
     schema='DATASETS'
 )
 
-# Create button to generate Gap Report
-if st.button :beers:
-    st.write('Press Beer to Generate Gap Report')
+if st.button('Generate Gap Report :beers:'):
     create_gap_report(conn)
+
