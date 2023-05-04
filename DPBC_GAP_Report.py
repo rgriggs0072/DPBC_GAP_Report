@@ -80,7 +80,7 @@ def format_sales_report(workbook):
 
     # Format column as number with no decimals
     if col_idx:
-    for cell in ws.iter_cols(min_col=col_idx, max_col=col_idx):
+        for cell in ws.iter_cols(min_col=col_idx, max_col=col_idx):
         for c in cell:
             if isinstance(c.value, str) and c.value.strip() != '':
                 c.number_format = '0'
