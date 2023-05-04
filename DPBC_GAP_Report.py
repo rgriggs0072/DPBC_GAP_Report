@@ -171,11 +171,12 @@ def get_table_download_link(df):
     """
     Generates a link allowing the data in a given pandas dataframe to be downloaded in CSV format.
     """
+    """
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()
     href = f'<a href="data:file/csv;base64,{b64}" download="gap_report.csv">Click here to download the Gap Report!</a>'
     return href
-
+    """
 
 def create_gap_report(conn):
     """
@@ -192,7 +193,7 @@ def create_gap_report(conn):
     # Add a download button
     with open(temp_file_path, 'rb') as f:
         bytes_data = f.read()
-           st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
     st.dataframe(df)
 
