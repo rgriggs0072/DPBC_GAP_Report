@@ -190,7 +190,8 @@ def download_link(df, filename, link_text):
     writer.save()
     b64 = base64.b64encode(output.getvalue()).decode()
     href = f'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}'
-    return f'<a href="{href}" download="filename">{link_text}</a>'
+    return f'<a href="{href}" download="{filename}" target="_blank">{link_text}</a>'
+
 
 # Establish a new connection to Snowflake
 conn = snowflake.connector.connect(
