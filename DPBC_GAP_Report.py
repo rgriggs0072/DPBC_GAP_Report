@@ -70,15 +70,23 @@ def format_sales_report(workbook):
             if cell.value is not None and isinstance(cell.value, str):
                 cell.value = cell.value.replace(',', ' ')
 
-    # Get the column index of column G
-    col_idx = ws['G'][0].column
+    # Get the column index of "Buyer Count 2/1/2023 - 5/2/2023"
+    col_idx = None
+        for i, col in enumerate(ws.iter_cols()):
+            if col[0].value == "Buyer Count 2/1/2023 - 5/2/2023":
+                col_idx = i+1 # adjust for 0-indexing
+        break
 
-    # Format column as number with no decimals starting from row 2
-    for row in ws.iter_rows(min_row=2, min_col=col_idx, max_col=col_idx):
-        for cell in row:
-            if isinstance(cell.value, str) and cell.value.strip() != '':
-                cell.number_format = '0'
-                cell.value = float(cell.value.replace(",", ""))
+    # Format column as number with no decimals
+    if col_idx:
+        for cell in ws.iter_cols(min_col=col_idx, max_col=col_idx, min_row=2):
+            for c in cell:
+                if isinstance(c.value, str) and c.value.strip() != '':
+                    c.number_format = '0'
+                    c.value = float(c.value.replace(",", ""))
+                else:
+                    c.number_format = '0'
+
 
 
                 
