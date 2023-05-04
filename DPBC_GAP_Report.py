@@ -76,6 +76,13 @@ def format_sales_report(workbook):
     for cell in ws['C']:
         if cell.value is not None:
             cell.value = str(cell.value).replace(',', ' ')
+            
+            
+            
+    # Remove all Is Null from column F
+    for cell in ws['F']:
+        if cell.value is not None:
+            cell.value = str(cell.value).replace('Is Null', '0')
 
     # Format column G as number with no decimals
     for cell in ws['G'][1:]:
