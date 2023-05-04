@@ -177,6 +177,7 @@ def create_gap_report(conn):
     if st.button('Download Gap Report'):
         tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
         st.markdown(tmp_download_link, unsafe_allow_html=True)
+        st.write(tmp_download_link)  # print the link
 
 def download_link(df, filename, link_text):
     """
