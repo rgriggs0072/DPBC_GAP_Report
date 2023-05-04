@@ -40,7 +40,18 @@ def format_sales_report(workbook):
     for cell in ws['F']:
         if cell.value is not None:
             cell.value = str(cell.value).replace('-', '')
-
+            
+    # Remove the word Is Null and replace with zero(0) in column F
+    for cell in ws['F']:
+        if cell.value is not None:
+            cell.value = str(cell.value).replace('Is Null', '0')
+    
+    # Remove commas from column E and replace with space
+    for cell in ws['E']:
+        if cell.value is not None:
+            cell.value = str(cell.value).replace(',', ' ')
+            
+            
     # Create a new column for store name
     ws.insert_cols(2)
     ws.cell(row=1, column=2, value='STORE NAME')
@@ -61,10 +72,6 @@ def format_sales_report(workbook):
         if cell.value is not None and isinstance(cell.value, str):
             cell.value = cell.value.replace(',', ' ')
 
-    # Remove all 's in column B
-    for cell in ws['B']:
-        if cell.value is not None and isinstance(cell.value, str):
-            cell.value = cell.value.replace(" 's", "")
 
     # Replace all commas with spaces in column E
     for row in ws.iter_rows(min_row=2, min_col=5, max_col=5):
