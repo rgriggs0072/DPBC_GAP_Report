@@ -51,7 +51,6 @@ def format_sales_report(workbook):
         if cell.value is not None:
             cell.value = str(cell.value).replace(',', ' ')
             
-            
     # Create a new column for store name
     ws.insert_cols(2)
     ws.cell(row=1, column=2, value='STORE NAME')
@@ -85,6 +84,11 @@ def format_sales_report(workbook):
             if isinstance(cell.value, str) and cell.value.strip() != '' and cell.value != 'Carrier UPC':
                 cell.number_format = '0'
                 cell.value = float(cell.value.replace(",", ""))
+                
+    # Remove all commas from column C and replace with space
+    for cell in ws['C']:
+        if cell.value is not None:
+            cell.value = str(cell.value).replace(',', ' ')
 
     return workbook
 
