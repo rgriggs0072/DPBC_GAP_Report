@@ -128,22 +128,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
         schema='DATASETS'
     )
 
-    """
-    # read Excel file into pandas DataFrame
-    df = pd.read_excel(uploaded_file)
-    # replace NaN values with "NULL"
-    df.fillna(value=np.nan, inplace=True)
     
-    # replace NaN values with "NULL"
-    df.fillna(value=np.nan, inplace=True)
-    
-    # Check if the STORE_NAME column contains empty values
-    if df(df.loc [1:4700'STORE_NAME'].isnull().values.any():
-        st.warning("The STORE_NAME column contains empty values. Please fix the spreadsheet and upload again.")
-        return
-    """
-    # read Excel file into pandas DataFrame
-  
     
     
  
@@ -180,8 +165,8 @@ if uploaded_file:
     st.dataframe(df)
 
     # get warehouse and schema name from user
-    warehouse_name = st.text_input("Enter warehouse name:")
-    schema_name = st.text_input("Enter schema name:")
+   # warehouse_name = st.text_input("Enter warehouse name:")
+   # schema_name = st.text_input("Enter schema name:")
     print(df.columns)
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
