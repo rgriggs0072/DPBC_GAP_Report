@@ -108,9 +108,9 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     
     
     # read Excel file into pandas DataFrame
-df = pd.read_excel(uploaded_file)
-# replace NaN values with "NULL"
-df.fillna(value=np.nan, inplace=True)
+    df = pd.read_excel(uploaded_file)
+    # replace NaN values with "NULL"
+    df.fillna(value=np.nan, inplace=True)
 
 # Check if the STORE_NAME column contains empty values
 if df['STORE_NAME'].isnull().values.any():
