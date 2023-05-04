@@ -209,6 +209,6 @@ conn = snowflake.connector.connect(
 )
 
 # Create button to generate Gap Report
-if st.button(:beers:):
+if st.button(:beers:)
     st.write('Press Beer to Generate Gap Report')
     create_gap_report(conn)
