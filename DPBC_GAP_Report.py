@@ -160,7 +160,6 @@ if uploaded_file:
     if st.button("Import into Snowflake"):
         write_to_snowflake(df, warehouse_name, "datasets", schema_name, "datasets")
 
-
 import streamlit as st
 import pandas as pd
 import base64
