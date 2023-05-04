@@ -184,8 +184,8 @@ def create_gap_report(conn):
     query = "SELECT * FROM Gap_Report"
     df = pd.read_sql(query, conn)
 
-   if st.button('Download Gap Report'):
-    print("Download button clicked!")
+if st.button('Download Gap Report'):
+        print("Download button clicked!")
     tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
     st.markdown(tmp_download_link, unsafe_allow_html=True)
 
