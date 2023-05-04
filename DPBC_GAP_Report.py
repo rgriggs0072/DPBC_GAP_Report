@@ -183,15 +183,20 @@ def create_gap_report(conn):
 
 
 
+import base64
+import io
+
 def download_link(df, filename, link_text):
     """
     Generates a link allowing the data in a given pandas dataframe to be downloaded in Excel format.
     """
-    output = BytesIO()
+    output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
     df.to_excel(writer, sheet_name='Sheet1', index=False)
     writer.save()
-    b64 = base64.b64encode(output.getvalue()).decode()
+    excel_data = output.getvalue()
+
+    b64 = base64.b64encode(excel_data).decode()
     href = f'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}'
     return f'<a href="{href}" download="{filename}">{link_text}</a>'
 
