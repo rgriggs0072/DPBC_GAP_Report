@@ -100,7 +100,7 @@ if uploaded_file is not None:
         new_workbook.save(stream)
         stream.seek(0)
         st.download_button(label="Download formatted file", data=stream.read(), file_name=new_filename, mime='application/vnd.ms-excel')
-        st.write("File is in your download folder
+    
 
 
 
