@@ -127,6 +127,9 @@ def write_to_snowflake(df, warehouse, database, schema, table):
         st.warning("The STORE_NAME column contains empty values. Please fix the spreadsheet and upload again.")
         return
 
+    # replace NaN values with "NULL"
+    df.fillna(value=np.nan, inplace=True)
+
     # write DataFrame to Snowflake
     cursor = conn.cursor()
     sql_query = "CREATE OR REPLACE TABLE tmp_table AS SELECT \
