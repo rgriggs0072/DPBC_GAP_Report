@@ -7,6 +7,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
 import numpy as np
 from io import BytesIO
+from openpyxl.styles import numbers
 
 # Displaying images on the front end
 from PIL import Image
@@ -69,10 +70,14 @@ def format_sales_report(workbook):
             if cell.value is not None and isinstance(cell.value, str):
                 cell.value = cell.value.replace(',', ' ')
 
-      # Format column G as a number with no decimals
-        df["G"] = df["G"].apply(lambda x: int(x))
-
-    
+    # Format column G to number format with no decimals
+    for row in ws.iter_rows(min_row=2, min_col=7, max_col=7):
+        for cell in row:
+            if isinstance(cell.value, str) and cell.value.strip() != '' and cell.value != 'Carrier UPC':
+                cell.number_format = numbers.FORMAT_NUMBER
+                cell.number_format = '0'
+                cell.value = int(cell.value.replace(",", ""))
+                
     
     # Format column G to number format with no decimals
     #for row in ws.iter_rows(min_row=2, min_col=7, max_col=7):
