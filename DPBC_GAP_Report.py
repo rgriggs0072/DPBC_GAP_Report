@@ -78,10 +78,10 @@ def format_sales_report(workbook):
 
     # Get the column index of "Buyer Count 2/1/2023 - 5/2/2023"
     col_idx = None
-        for i, col in enumerate(ws.iter_cols()):
-            if col[0].value == "Buyer Count 2/1/2023 - 5/2/2023":
-                col_idx = i+1 # adjust for 0-indexing
-                break
+    for i, col in enumerate(ws.iter_cols()):
+        if col[0].value == "Buyer Count 2/1/2023 - 5/2/2023":
+            col_idx = i+1 # adjust for 0-indexing
+            break
 
     # Format column as number with no decimals
     if col_idx:
