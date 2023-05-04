@@ -173,13 +173,10 @@ def create_gap_report(conn):
     query = "SELECT * FROM Gap_Report"
     df = pd.read_sql(query, conn)
 
-    # Create button to download Excel file
-    if st.button('Download Gap Report'):
-        tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
-        st.markdown(tmp_download_link, unsafe_allow_html=True)
-
-    # Display the data in a table
-    st.dataframe(df)
+   # Create button to download Excel file
+if st.button('Download Gap Report'):
+    tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
+    st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 
 
@@ -190,7 +187,7 @@ def download_link(df, filename, link_text):
     """
     Generates a link allowing the data in a given pandas dataframe to be downloaded in Excel format.
     """
-    output = BytesIO()
+    output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
     df.to_excel(writer, sheet_name='Sheet1', index=False)
     writer.save()
