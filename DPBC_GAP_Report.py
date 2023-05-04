@@ -190,13 +190,13 @@ def create_gap_report(conn):
     # Write the updated dataframe to a temporary file
     temp_file_path = 'temp.xlsx'
     df.to_excel(temp_file_path, index=False)
- """
+    """
     # Add a download button
     with open(temp_file_path, 'rb') as f:
         bytes_data = f.read()
         st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     st.write("File Has Been Downloaded to Your Local Download Folder")
- """
+    """
     if st.button('Download Gap Report'):
         with open(temp_file_path, 'rb') as f:
             bytes_data = f.read()
