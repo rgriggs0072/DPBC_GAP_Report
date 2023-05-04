@@ -140,10 +140,17 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     df.fillna(value=np.nan, inplace=True)
     
     # Check if the STORE_NAME column contains empty values
-    if df['STORE_NAME'].isnull().values.any():
+    if df(df.loc [1:4700'STORE_NAME'].isnull().values.any():
         st.warning("The STORE_NAME column contains empty values. Please fix the spreadsheet and upload again.")
         return
     """
+    # read Excel file into pandas DataFrame
+    df = pd.read_excel(uploaded_file)
+    # replace NaN values with "NULL"
+    df.fillna(value=np.nan, inplace=True)
+    
+    
+    (df["Store_Name"].notnull()) & (df["Store_Name"]==u'')
     # write DataFrame to Snowflake
     cursor = conn.cursor()
     sql_query = "CREATE OR REPLACE TABLE tmp_table AS SELECT \
