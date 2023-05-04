@@ -164,6 +164,19 @@ import streamlit as st
 import pandas as pd
 import base64
 import snowflake.connector
+from io import BytesIO
+
+def download_link(df, filename, link_text):
+    """
+    Generates a link allowing the data in a given pandas dataframe to be downloaded in Excel format.
+    """
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='Sheet1', index=False)
+    writer.save()
+    b64 = base64.b64encode(output.getvalue()).decode()
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="{filename}">{link_text}</a>'
+    return href
 
 def create_gap_report(conn):
     """
@@ -173,28 +186,13 @@ def create_gap_report(conn):
     query = "SELECT * FROM Gap_Report"
     df = pd.read_sql(query, conn)
 
-   # Create button to download Excel file
-if st.button('Download Gap Report'):
-    tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
-    st.markdown(tmp_download_link, unsafe_allow_html=True)
+    # Create button to download Excel file
+    if st.button('Download Gap Report'):
+        tmp_download_link = download_link(df, 'gap_report.xlsx', 'Click here to download the Gap Report!')
+        st.markdown(tmp_download_link, unsafe_allow_html=True)
 
-
-
-import base64
-import io
-
-def download_link(df, filename, link_text):
-    """
-    Generates a link allowing the data in a given pandas dataframe to be downloaded in Excel format.
-    """
-    output = io.BytesIO()
-    writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer, sheet_name='Sheet1', index=False)
-    writer.save()
-    b64 = base64.b64encode(output.getvalue()).decode()
-    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="{filename}">{link_text}</a>'
-    return href
-
+    # Display the data in a table
+    st.dataframe(df)
 
 # Establish a new connection to Snowflake
 conn = snowflake.connector.connect(
@@ -209,7 +207,3 @@ conn = snowflake.connector.connect(
 # Create button to generate Gap Report
 if st.button('Generate Gap Report'):
     create_gap_report(conn)
-
-
-
-
