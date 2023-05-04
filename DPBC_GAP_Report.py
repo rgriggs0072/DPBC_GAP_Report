@@ -73,12 +73,12 @@ def format_sales_report(workbook):
     # Get the column index of column G
     col_idx = ws['G'][0].column
 
-# Format column as number with no decimals
-    for cell in ws.iter_cols(min_col=col_idx, max_col=col_idx):
-        for c in cell:
-            if isinstance(c.value, str) and c.value.strip() != '':
-                c.number_format = '0'
-                c.value = float(c.value.replace(",", ""))
+    # Format column as number with no decimals starting from row 2
+    for row in ws.iter_rows(min_row=2, min_col=col_idx, max_col=col_idx):
+        for cell in row:
+            if isinstance(cell.value, str) and cell.value.strip() != '':
+                cell.number_format = '0'
+                cell.value = float(cell.value.replace(",", ""))
 
 
                 
