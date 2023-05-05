@@ -194,11 +194,7 @@ if uploaded_file:
     print(df.columns)
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
-        with st.sidebar:
-            with st.spinner("Loading..."):
-        #time.sleep(5)
-                st.success("Done!")
-    #with st.spinner('Uploading data to Snowflake ...'):
+        with st.spinner('Uploading data to Snowflake ...'):
             write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "datasets")
 
 import streamlit as st
@@ -252,7 +248,9 @@ conn = snowflake.connector.connect(
 )
 
 if st.sidebar.button('Generate Gap Report :beers:'):
-    with st.sidebar.spinner('Generating report...'):
+    with st.sidebar
+        with st.spinner('Generating report...'):
+        st.success("Done!")    
         create_gap_report(conn)
     
 
