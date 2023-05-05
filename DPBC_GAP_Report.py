@@ -195,7 +195,7 @@ if uploaded_file:
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
         with st.sidebar:
-        with st.spinner("Loading..."):
+            with st.spinner("Loading..."):
         #time.sleep(5)
     st.success("Done!")
     #with st.spinner('Uploading data to Snowflake ...'):
