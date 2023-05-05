@@ -96,18 +96,13 @@ def format_sales_report(workbook):
                 pass
                 
     
-    # Format column G to number format with no decimals
-    #for row in ws.iter_rows(min_row=2, min_col=7, max_col=7):
-    #    for cell in row:
-    #        if isinstance(cell.value, str) and cell.value.strip() != '' and cell.value != 'Carrier UPC':
-    #            cell.number_format = '0'
-    #            cell.value = float(cell.value.replace(",", ""))
+    
 
     return workbook
 
 
 # Upload the workbook
-uploaded_file = st.file_uploader("Upload freshly ran sales report from Encore", type=["xlsx", "xls"])
+uploaded_file = st.file_uploader("Upload freshly ran sales report from Encompass", type=["xlsx", "xls"])
 
 if uploaded_file is not None:
     # Load the workbook
