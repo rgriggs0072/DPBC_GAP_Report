@@ -15,7 +15,7 @@ import datetime
 # Displaying images on the front end
 from PIL import Image
 image = Image.open('images/DeltaPacific_Logo.jpg')
-st.image(image, caption='',width=100)
+st.image(image, caption='',width=200)
 
 st.title("Delta Pacific Beverage")
 st.header("Gap Report and Analysis")
