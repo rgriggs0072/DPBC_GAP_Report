@@ -270,6 +270,6 @@ def create_gap_report(conn):
         schema=snowflake_creds["schema"]
     )
 
- if st.sidebar.button('Generate Gap Report :beers:'):
+if st.sidebar.button('Generate Gap Report :beers:'):
     with st.spinner('Generating report...'):
         create_gap_report(conn)
