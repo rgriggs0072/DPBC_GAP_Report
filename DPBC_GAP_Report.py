@@ -278,9 +278,7 @@ if st.sidebar.button('Generate Gap Report :beers:'):
 # Load Snowflake credentials from the secrets.toml file
 snowflake_creds = st.secrets["snowflake"]
 
-def create_gap_report(conn):
-    # Your code for creating the gap report goes here
-    pass
+
 
 with st.sidebar:
     # Establish a new connection to Snowflake
