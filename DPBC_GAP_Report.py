@@ -197,7 +197,7 @@ if uploaded_file:
         with st.sidebar:
             with st.spinner("Loading..."):
         #time.sleep(5)
-            st.success("Done!")
+                st.success("Done!")
     #with st.spinner('Uploading data to Snowflake ...'):
             write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "datasets")
 
