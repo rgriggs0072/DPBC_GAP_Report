@@ -195,7 +195,7 @@ if uploaded_file:
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
         with st.spinner('Uploading data to Snowflake ...'):
-        write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "datasets")
+            write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "datasets")
 
 import streamlit as st
 import pandas as pd
