@@ -194,6 +194,7 @@ if uploaded_file:
     print(df.columns)
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
+         with st.spinner('Uploading data to Snowflake ...'):
         write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "datasets")
 
 import streamlit as st
@@ -230,7 +231,7 @@ def create_gap_report(conn):
     with open(temp_file_path, 'rb') as f:
         bytes_data = f.read()
         st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    st.write("File will Been Downloaded to Your Local Download Folder")
+    st.write("File will Be Downloaded to Your Local Download Folder")
     
     
     st.dataframe(df)
@@ -247,7 +248,7 @@ conn = snowflake.connector.connect(
 )
 
 if st.sidebar.button('Generate Gap Report :beers:'):
-    with st.spinner('Generating report...'):
+    with st.sidebar.spinner('Generating report...'):
         create_gap_report(conn)
     
 
