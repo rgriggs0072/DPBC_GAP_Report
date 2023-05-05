@@ -250,31 +250,6 @@ def create_gap_report(conn):
     st.dataframe(df)
    
 
-# Establish a new connection to Snowflake
-#conn = snowflake.connector.connect(
-#    user='rgriggs0072',
-#    password='Cyaamstr927!',
-#    account='OEZIERR-CNB82593',
-#    warehouse='COMPUTE_WH',
-#    database='DATASETS',
-#    schema='DATASETS'
-#)
-"""    with st.sidebar:
-    # Establish a new connection to Snowflake
-        conn = snowflake.connector.connect(
-        account=snowflake_creds["account"],
-        user=snowflake_creds["user"],
-        password=snowflake_creds["password"],
-        warehouse=snowflake_creds["warehouse"],
-        database=snowflake_creds["database"],
-        schema=snowflake_creds["schema"]
-    )
-
-if st.sidebar.button('Generate Gap Report :beers:'):
-    with st.spinner('Generating report...'):
-        create_gap_report(conn)
-"""
-
 # Load Snowflake credentials from the secrets.toml file
 snowflake_creds = st.secrets["snowflake"]
 
