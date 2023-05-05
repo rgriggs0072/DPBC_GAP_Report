@@ -259,7 +259,7 @@ def create_gap_report(conn):
 #    database='DATASETS',
 #    schema='DATASETS'
 #)
- with st.sidebar:
+    with st.sidebar:
     # Establish a new connection to Snowflake
     conn = snowflake.connector.connect(
         account=snowflake_creds["account"],
