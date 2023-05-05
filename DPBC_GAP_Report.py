@@ -263,7 +263,7 @@ def create_gap_report(conn):
     snowflake_creds = st.secrets["snowflake"]
 
     # Establish a new connection to Snowflake
- conn = snowflake.connector.connect(
+    conn = snowflake.connector.connect(
     account=snowflake_creds["account"],
     user=snowflake_creds["user"],
     password=snowflake_creds["password"],
