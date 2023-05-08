@@ -187,6 +187,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
 
 # create file uploader
 uploaded_file = st.file_uploader("UPLOAD CURRENT SALES REPORT AFTER IT HAS BEEN FORMATED", type=["xlsx"])
+env = st.sidebar.selectbox("Select environment:", ["production", "testing"])
 
 # check if file was uploaded
 if uploaded_file:
