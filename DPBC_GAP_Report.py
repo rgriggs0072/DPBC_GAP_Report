@@ -139,15 +139,7 @@ def write_to_snowflake(df, warehouse, database, schema, table):
 
 
   
-    # establish a new connection to Snowflake
-    #conn = snowflake.connector.connect(
-    #    user='rgriggs0072',
-    #    password='Cyaamstr927!',
-    #    account='OEZIERR-CNB82593',
-    #    warehouse='COMPUTE_WH',
-    #    database='datasets',
-    #    schema='DATASETS'
-    #)
+    
     # Load Snowflake credentials from the secrets.toml file
     snowflake_creds = st.secrets["snowflake"]
 
@@ -162,6 +154,14 @@ def write_to_snowflake(df, warehouse, database, schema, table):
     )
     
     
+    # define the table name based on the environment selected
+    if env == "production":
+        table_name = sales_report
+    elif env == "testing":
+        table_name = tmp_table
+    else:
+        st.error("Invalid environment selected")
+        return
     
  
     # write DataFrame to Snowflake
@@ -196,20 +196,16 @@ if uploaded_file:
     # display DataFrame in Streamlit
     st.dataframe(df)
 
-    # get warehouse and schema name from user
-   # warehouse_name = st.text_input("Enter warehouse name:")
-   # schema_name = st.text_input("Enter schema name:")
-    print(df.columns)
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
         with st.spinner('Uploading data to Snowflake ...'):
-            write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "datasets")
+            write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "DATASETS", env)
 
-import streamlit as st
-import pandas as pd
-import base64
-import snowflake.connector
-from io import BytesIO
+#import streamlit as st
+#import pandas as pd
+#import base64
+#import snowflake.connector
+#from io import BytesIO
 
 
 def get_table_download_link(df):
@@ -222,6 +218,7 @@ def get_table_download_link(df):
     href = f'<a href="data:file/csv;base64,{b64}" download="gap_report.csv">Click here to download the Gap Report!</a>'
     return href
     """
+    env = st.sidebar.selectbox("Select environment:", ["production", "testing"])
 
 def create_gap_report(conn):
     """
@@ -243,7 +240,7 @@ def create_gap_report(conn):
 
         st.download_button(label="Download Gap Report", data=bytes_data, file_name=file_name, mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         
-        #st.download_button(label="Download Gap Report", data=bytes_data, file_name='Gap_Report_{today}.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        
     st.write("File will Be Downloaded to Your Local Download Folder")
     
     
@@ -252,9 +249,6 @@ def create_gap_report(conn):
 
 # Load Snowflake credentials from the secrets.toml file
 snowflake_creds = st.secrets["snowflake"]
-
-
-
 with st.sidebar:
     # Establish a new connection to Snowflake
     conn = snowflake.connector.connect(
