@@ -157,14 +157,14 @@ def write_to_snowflake(df, warehouse, database, schema, env):
     # define the table name based on the environment selected
     if env == "production":
         table_name = "SALES_REPORT"
-        if not st.checkbox("Are you sure you want to import data into the production environment?"):
-            st.warning("Data import has been cancelled")
+            if not st.checkbox("Are you sure you want to import data into the production environment?"):
+                st.warning("Data import has been cancelled")
             return
     elif env == "testing":
         table_name = "TMP_TABLE"
     else:
-    st.error("Invalid environment selected")
-        return
+        st.error("Invalid environment selected")
+            return
 
     
  
