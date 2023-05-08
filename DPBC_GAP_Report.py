@@ -156,9 +156,9 @@ def write_to_snowflake(df, warehouse, database, schema, env):
     
     # define the table name based on the environment selected
     if env == "production":
-        table_name = sales_report
+        table_name = "SALES_REPORT
     elif env == "testing":
-        table_name = tmp_table
+        table_name = "TMP_TABLE"
     else:
         st.error("Invalid environment selected")
         return
