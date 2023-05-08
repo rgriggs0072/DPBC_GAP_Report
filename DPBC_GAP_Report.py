@@ -125,7 +125,7 @@ if uploaded_file is not None:
 
 
 
-def write_to_snowflake(df, warehouse, database, schema, table):
+def write_to_snowflake(df, warehouse, database, schema, env):
     
     
     # read Excel file into pandas DataFrame
