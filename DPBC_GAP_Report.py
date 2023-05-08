@@ -163,7 +163,7 @@ elif env == "testing":
     table_name = "TMP_TABLE"
 else:
     st.error("Invalid environment selected")
-        return
+    return
 
 
     
