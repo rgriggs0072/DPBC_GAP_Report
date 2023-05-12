@@ -158,7 +158,7 @@ if env == "production":
     table_name = "SALES_REPORT"
     if not st.sidebar.checkbox("Are you sure you want to import data into the production environment?"):
         st.warning("Data import has been cancelled")
-        return
+    return
 elif env == "testing":
     table_name = "TMP_TABLE"
 else:
