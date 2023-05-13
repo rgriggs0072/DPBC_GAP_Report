@@ -154,16 +154,16 @@ def write_to_snowflake(df, warehouse, database, schema, env):
     )
     
     
-    if env == "production":
-        table_name = "SALES_REPORT"
-        if not st.sidebar.checkbox("Are you sure you want to import data into the production environment?"):
-            st.warning("Data import has been cancelled")
-        return
-    elif env == "testing":
-        table_name = "TMP_TABLE"
-    else:
-        st.error("Invalid environment selected")
-    return
+    #if env == "production":
+    #    table_name = "SALES_REPORT"
+    #    if not st.sidebar.checkbox("Are you sure you want to import data into the production environment?"):
+    #        st.warning("Data import has been cancelled")
+    #    return
+    #elif env == "testing":
+    #    table_name = "TMP_TABLE"
+    #else:
+    #    st.error("Invalid environment selected")
+    #return
 
 
     
@@ -191,7 +191,7 @@ def write_to_snowflake(df, warehouse, database, schema, env):
 
 # create file uploader
 uploaded_file = st.file_uploader("UPLOAD CURRENT SALES REPORT AFTER IT HAS BEEN FORMATED", type=["xlsx"])
-env = st.sidebar.selectbox("Select environment:", ["production", "testing"])
+#env = st.sidebar.selectbox("Select environment:", ["production", "testing"])
 
 # check if file was uploaded
 if uploaded_file:
@@ -204,7 +204,7 @@ if uploaded_file:
     # write DataFrame to Snowflake on button click
     if st.button("Import into Snowflake"):
         with st.spinner('Uploading data to Snowflake ...'):
-            write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", env)
+            write_to_snowflake(df, "COMPUTE_WH", "datasets", "DATASETS", "Sales_Report")
 
 #import streamlit as st
 #import pandas as pd
