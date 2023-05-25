@@ -235,7 +235,7 @@ def create_gap_report(conn):
     cursor.close()
 
     # Execute SQL query to retrieve data from the updated view
-    query = "SELECT * FROM GP_TEST"
+    query = "SELECT * FROM Gap_Report"
     df = pd.read_sql(query, conn)
 
     # Write the updated dataframe to a temporary file
