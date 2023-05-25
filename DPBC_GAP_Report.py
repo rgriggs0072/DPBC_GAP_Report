@@ -225,7 +225,7 @@ def get_table_download_link(df):
     env = st.sidebar.selectbox("Select environment:", ["production", "testing"])
 
 
-    def create_gap_report(conn):
+def create_gap_report(conn):
     """
     Retrieves data from a Snowflake view and creates a button to download the data as a CSV report.
     """
