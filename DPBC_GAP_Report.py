@@ -225,12 +225,18 @@ def get_table_download_link(df):
     """
     env = st.sidebar.selectbox("Select environment:", ["production", "testing"])
 
-def create_gap_report(conn):
+
+    def create_gap_report(conn):
     """
     Retrieves data from a Snowflake view and creates a button to download the data as a CSV report.
     """
-    # Execute SQL query and retrieve data from the Gap_Report view
-    query = "SELECT * FROM Gap_Report"
+    # Execute the stored procedure
+    cursor = conn.cursor()
+    cursor.execute("CALL PROCESS_GAP_REPORT()")  # Replace with the stored procedure call
+    cursor.close()
+
+    # Execute SQL query to retrieve data from the updated view
+    query = "SELECT * FROM GAP_REPORT_tmp2 WHERE sc_STATUS = 'Yes' ORDER BY STORE_NUMBER"
     df = pd.read_sql(query, conn)
 
     # Write the updated dataframe to a temporary file
@@ -240,17 +246,13 @@ def create_gap_report(conn):
     # Add a download button
     with open(temp_file_path, 'rb') as f:
         bytes_data = f.read()
-        today = datetime.datetime.today().strftime('%Y-%m-%d') # get current date in YYYY-MM-DD format
-        file_name = f"Gap_Report_{today}.xlsx" # insert current date into file name
+        today = datetime.datetime.today().strftime('%Y-%m-%d')  # get current date in YYYY-MM-DD format
+        file_name = f"Gap_Report_{today}.xlsx"  # insert current date into file name
 
         st.download_button(label="Download Gap Report", data=bytes_data, file_name=file_name, mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         
-        
-    st.write("File will Be Downloaded to Your Local Download Folder")
-    
-    
+    st.write("File will be downloaded to your local download folder")
     st.dataframe(df)
-   
 
 # Load Snowflake credentials from the secrets.toml file
 snowflake_creds = st.secrets["snowflake"]
@@ -268,3 +270,15 @@ with st.sidebar:
     if st.sidebar.button('Generate Gap Report :beers:'):
         with st.spinner('Generating report...'):
             create_gap_report(conn)
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
