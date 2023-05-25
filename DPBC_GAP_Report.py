@@ -212,7 +212,6 @@ if uploaded_file:
 #import snowflake.connector
 #from io import BytesIO
 
-
 def get_table_download_link(df):
     """
     Generates a link allowing the data in a given pandas dataframe to be downloaded in CSV format.
