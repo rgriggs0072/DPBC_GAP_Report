@@ -235,7 +235,7 @@ def create_gap_report(conn):
     cursor.close()
 
     # Execute SQL query to retrieve data from the updated view
-    query = "SELECT * FROM GAP_REPORT_tmp2 WHERE sc_STATUS = 'Yes' ORDER BY STORE_NUMBER"
+    query = "SELECT * FROM GAP_REPORT_tmp2 WHERE SC_STATUS = 'Yes' ORDER BY STORE_NUMBER"
     df = pd.read_sql(query, conn)
 
     # Write the updated dataframe to a temporary file
