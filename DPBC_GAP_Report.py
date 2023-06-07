@@ -72,7 +72,11 @@ def format_sales_report(workbook):
         for cell in row:
             if cell.value is not None and isinstance(cell.value, str):
                 cell.value = cell.value.replace(',', ' ')
-
+    # Replace all commas with spaces in column E
+    for row in ws.iter_rows(min_row=2, min_col=5, max_col=5):
+        for cell in row:
+            if cell.value is not None and isinstance(cell.value, str):
+                cell.value = cell.value.replace("'", ' ')
    
     # Remove all commas from column C
     for cell in ws['C']:
