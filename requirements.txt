@@ -1,6 +1,6 @@
 streamlit 
 pandas
-snowflake-connector-python==2.6.2
+snowflake-connector-python>=3.0.2
 openpyxl
 numpy==1.20.3
 
